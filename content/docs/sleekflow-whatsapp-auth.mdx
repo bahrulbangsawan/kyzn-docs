@@ -1,0 +1,170 @@
+---
+title: Sleekflow WhatsApp OTP
+description: Integrasi WhatsApp Official API untuk autentikasi OTP
+---
+
+## Setup
+
+<Steps>
+
+### Buat Template di Meta
+
+Buka [WhatsApp Manager](https://business.facebook.com/latest/whatsapp_manager/message_templates), klik **Create Template**, pilih **Authentication Template**, lalu isi fields sesuai kebutuhan.
+
+### Konfigurasi Sleekflow
+
+Buka [Sleekflow Channels](https://app.sleekflow.io/en/channels/whatsapp/template), pilih WABA yang sama, gunakan format **Platform API Integration**:
+
+```json title="Template Config"
+{
+  "whatsappCloudApiTemplateMessageObject": {
+    "language": "en",
+    "templateName": "otp_whatsapp",
+    "components": [
+      {
+        "type": "BODY",
+        "parameters": [{ "type": "text", "text": "{{1}}" }]
+      },
+      {
+        "type": "button",
+        "sub_type": "URL",
+        "index": 0,
+        "parameters": [{ "type": "text", "text": "{{1}}" }]
+      }
+    ]
+  }
+}
+```
+
+### Setup Environment Variables
+
+```bash title=".env"
+SLEEKFLOW_API_KEY=your_api_key
+SLEEKFLOW_API_URL=https://api.sleekflow.io/api/message/send/json
+SLEEKFLOW_SENDER_PHONE=628118601000
+SLEEKFLOW_CHANNEL=whatsappcloudapi
+SLEEKFLOW_TEMPLATE_NAME=otp_whatsapp
+SLEEKFLOW_TEMPLATE_LANGUAGE=en
+SLEEKFLOW_TEMPLATE_NAMESPACE=your_namespace
+SLEEKFLOW_TEMPLATE_HAS_BUTTON=true
+```
+
+</Steps>
+
+<Callout type="info">
+  `SLEEKFLOW_TEMPLATE_NAMESPACE` hanya diperlukan untuk channel **360Dialog**.
+</Callout>
+
+---
+
+## Payload API
+
+<Tabs items={['Cloud API + Button', 'Cloud API (No Button)', '360Dialog', 'Fallback SMS']}>
+
+<Tab value="Cloud API + Button">
+```json title="payload.json"
+{
+  "channel": "whatsappcloudapi",
+  "from": "628118601000",
+  "to": "6281234567890",
+  "messageType": "template",
+  "extendedMessage": {
+    "whatsappCloudApiTemplateMessageObject": {
+      "templateName": "otp_whatsapp",
+      "language": "en",
+      "components": [
+        {
+          "type": "BODY",
+          "parameters": [{ "type": "text", "text": "123456" }]
+        },
+        {
+          "type": "button",
+          "sub_type": "URL",
+          "index": 0,
+          "parameters": [{ "type": "text", "text": "123456" }]
+        }
+      ]
+    }
+  }
+}
+```
+</Tab>
+
+<Tab value="Cloud API (No Button)">
+Set `SLEEKFLOW_TEMPLATE_HAS_BUTTON=false`, hilangkan komponen button.
+
+```json title="payload.json"
+{
+  "channel": "whatsappcloudapi",
+  "from": "628118601000",
+  "to": "6281234567890",
+  "messageType": "template",
+  "extendedMessage": {
+    "whatsappCloudApiTemplateMessageObject": {
+      "templateName": "otp_whatsapp",
+      "language": "en",
+      "components": [
+        {
+          "type": "BODY",
+          "parameters": [{ "type": "text", "text": "123456" }]
+        }
+      ]
+    }
+  }
+}
+```
+</Tab>
+
+<Tab value="360Dialog">
+```json title="payload.json"
+{
+  "channel": "whatsapp360dialog",
+  "from": "628118601000",
+  "to": "6281234567890",
+  "messageType": "template",
+  "extendedMessage": {
+    "whatsapp360DialogTemplateMessage": {
+      "templateName": "otp_whatsapp",
+      "templateNamespace": "your_namespace",
+      "language": "en",
+      "components": [
+        {
+          "type": "BODY",
+          "parameters": [{ "type": "text", "text": "123456" }]
+        }
+      ]
+    }
+  }
+}
+```
+</Tab>
+
+<Tab value="Fallback SMS">
+Untuk channel non-WhatsApp template:
+
+```json title="payload.json"
+{
+  "channel": "sms",
+  "from": "628118601000",
+  "to": "6281234567890",
+  "messageType": "text",
+  "messageContent": "Your OTP code is: 123456"
+}
+```
+</Tab>
+
+</Tabs>
+
+---
+
+## API Request
+
+```bash title="HTTP Request"
+POST https://api.sleekflow.io/api/message/send/json
+Content-Type: application/json
+X-Sleekflow-Api-Key: <API_KEY>
+```
+
+<Cards>
+  <Card title="Sleekflow API Docs" href="https://apidoc.sleekflow.io/docs/platform-api/bb219d474efcd-send-message" />
+</Cards>
