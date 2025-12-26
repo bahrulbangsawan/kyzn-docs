@@ -1,0 +1,9 @@
+{
+  "title": "Product Knowledge",
+  "description": "Product knowledge base and documentation",
+  "root": true,
+  "pages": [
+    "---Intro---",
+    "index"
+  ]
+}

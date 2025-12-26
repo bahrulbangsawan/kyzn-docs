@@ -1,0 +1,184 @@
+---
+title: Theme CSS
+description: Panduan penggunaan Tailwind CSS untuk implementasi design system KYZN di website.
+---
+## CSS Variables
+
+### Colors
+```css
+:root {
+  --color-primary: 0 102 255;
+  --color-primary-dark: 0 82 204;
+  --color-primary-light: 230 240 255;
+  
+  --color-background: 255 255 255;
+  --color-foreground: 0 0 0;
+  --color-muted: 138 138 138;
+  --color-border: 229 229 229;
+  --color-card: 245 245 245;
+}
+
+.dark {
+  --color-background: 10 10 10;
+  --color-foreground: 255 255 255;
+  --color-muted: 160 160 160;
+  --color-border: 42 42 42;
+  --color-card: 26 26 26;
+}
+```
+
+## Tailwind Config
+
+### Extend Colors
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#0066FF',
+          dark: '#0052CC',
+          light: '#E6F0FF',
+        },
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        card: 'rgb(var(--color-card) / <alpha-value>)',
+      },
+    },
+  },
+}
+```
+
+## Component Classes
+
+### Buttons
+```css
+/* Primary Button */
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-lg 
+         hover:bg-primary-dark transition-colors;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  @apply bg-card text-foreground px-4 py-2 rounded-lg 
+         border border-border hover:bg-muted/10 transition-colors;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  @apply text-foreground px-4 py-2 rounded-lg 
+         hover:bg-muted/10 transition-colors;
+}
+```
+
+### Cards
+```css
+.card {
+  @apply bg-card border border-border rounded-xl p-6;
+}
+
+.card-hover {
+  @apply bg-card border border-border rounded-xl p-6 
+         transition-colors hover:bg-muted/5;
+}
+```
+
+### Typography
+```css
+.heading-1 {
+  @apply text-4xl font-bold tracking-tight;
+}
+
+.heading-2 {
+  @apply text-3xl font-bold tracking-tight;
+}
+
+.heading-3 {
+  @apply text-2xl font-semibold;
+}
+
+.body-text {
+  @apply text-base text-foreground leading-relaxed;
+}
+
+.text-muted {
+  @apply text-muted;
+}
+```
+
+### Form Elements
+```css
+.input {
+  @apply w-full px-4 py-2 rounded-lg border border-border 
+         bg-background text-foreground
+         focus:outline-none focus:ring-2 focus:ring-primary/50;
+}
+
+.label {
+  @apply text-sm font-medium text-foreground mb-1.5 block;
+}
+```
+
+## Utility Classes
+
+### Spacing
+```css
+/* Consistent spacing scale */
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+.container-padding {
+  @apply px-4 md:px-6 lg:px-8;
+}
+
+.stack-sm {
+  @apply space-y-2;
+}
+
+.stack-md {
+  @apply space-y-4;
+}
+
+.stack-lg {
+  @apply space-y-8;
+}
+```
+
+### Layout
+```css
+.container-narrow {
+  @apply max-w-3xl mx-auto;
+}
+
+.container-wide {
+  @apply max-w-6xl mx-auto;
+}
+
+.container-full {
+  @apply max-w-7xl mx-auto;
+}
+```
+
+## Dark Mode
+
+Gunakan class `dark:` untuk styling dark mode:
+
+```html
+<div class="bg-background dark:bg-background text-foreground dark:text-foreground">
+  <h1 class="text-foreground">Heading</h1>
+  <p class="text-muted">Muted text</p>
+</div>
+```
+
+## Best Practices
+
+- Gunakan CSS variables untuk warna agar mudah di-maintain
+- Manfaatkan Tailwind `@apply` untuk component classes yang reusable
+- Selalu sediakan dark mode variant
+- Gunakan spacing scale yang konsisten
+- Hindari magic numbers, gunakan design tokens

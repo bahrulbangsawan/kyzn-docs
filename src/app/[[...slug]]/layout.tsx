@@ -1,11 +1,11 @@
 import { source } from '@/lib/source';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions } from '@/lib/layout.shared';
+import { DocsLayoutWrapper } from '@/components/docs-layout-wrapper';
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions()}>
+    <DocsLayoutWrapper tree={source.pageTree} baseOptions={baseOptions()}>
       {children}
-    </DocsLayout>
+    </DocsLayoutWrapper>
   );
 }

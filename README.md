@@ -1,45 +1,175 @@
-# docs-kyzn
+# KYZN Docs
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+Internal documentation and knowledge base for KYZN, built with Next.js and Fumadocs.
 
-Run development server:
+## Overview
 
+KYZN Docs is a comprehensive documentation platform that provides access to:
+- **Product Knowledge**: Product knowledge base and documentation
+- **IT Development**: IT development documentation and resources
+- **Design System**: Design system documentation and guidelines
+- **Tutorials**: Tutorials and guides
+
+## Features
+
+- 📚 Multi-section documentation with MDX support
+- 🤖 AI-powered chat assistant (Ask RuBot) for interactive help
+- 🔍 Full-text search functionality
+- 🎨 Modern, responsive UI with dark mode support
+- 📱 Mobile-friendly design
+- ⚡ Fast performance with Next.js
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) 16.0.1
+- **Documentation**: [Fumadocs](https://fumadocs.dev/) 16.2.2
+- **UI Components**: Fumadocs UI, Radix UI
+- **Styling**: Tailwind CSS 4.1.16
+- **AI Chat**: AI SDK with OpenAI-compatible API
+- **Deployment**: Cloudflare (via OpenNext.js)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- npm, yarn, pnpm, or bun package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/itkyzn/kyzn-docs.git
+cd kyzn-docs
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+bun install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
-pnpm dev
+bun dev
 # or
-yarn dev
+pnpm dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Explore
+## Project Structure
 
-In the project, you can see:
+```
+docs-kyzn/
+├── content/              # MDX documentation files
+│   └── docs/
+│       ├── brand/        # Design system docs
+│       ├── funnel/       # Funnel documentation
+│       ├── it/           # IT development docs
+│       ├── pd/           # Product knowledge
+│       └── tutorial/     # Tutorials
+├── public/               # Static assets
+├── src/
+│   ├── app/              # Next.js app router
+│   │   ├── api/          # API routes (chat, search)
+│   │   └── [[...slug]]/  # Dynamic docs pages
+│   ├── components/       # React components
+│   │   ├── search.tsx    # AI search/chat component
+│   │   └── ui/           # UI components
+│   └── lib/              # Utilities and configs
+└── source.config.ts      # Fumadocs source configuration
+```
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+## Available Scripts
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:worker` - Build for Cloudflare Workers
+- `npm run preview` - Preview Cloudflare build locally
+- `npm run deploy` - Deploy to Cloudflare
+- `npm run start` - Start production server
+- `npm run lint` - Run Biome linter
+- `npm run format` - Format code with Biome
+- `npm run types:check` - Type check with TypeScript
 
-### Fumadocs MDX
+## Documentation Sections
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+### Product Knowledge (`/pd`)
+Product knowledge base and documentation.
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+### IT Development (`/it`)
+IT development documentation and resources, including:
+- Authentication guides (e.g., SleekFlow WhatsApp Auth)
 
-## Learn More
+### Design System (`/brand`)
+Design system documentation including:
+- Color palettes
+- Typography
+- Logo guidelines
+- Theme CSS
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+### Tutorials (`/tutorial`)
+Step-by-step tutorials and guides.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+## AI Chat Feature
+
+The documentation includes an AI-powered chat assistant (Ask RuBot) that can:
+- Answer questions about the documentation
+- Provide contextual help
+- Reference related documentation pages
+
+Access it via the "Ask AI" button in the bottom-right corner or use the keyboard shortcut `⌘K` (Mac) or `Ctrl+K` (Windows/Linux).
+
+## Configuration
+
+### Source Configuration
+
+Edit `source.config.ts` to customize:
+- Frontmatter schema
+- Content structure
+- MDX options
+
+### Layout Options
+
+Edit `src/lib/layout.shared.tsx` to customize:
+- Navigation
+- Sidebar
+- Theme options
+
+## Deployment
+
+### Cloudflare Workers
+
+This project is configured for deployment to Cloudflare Workers using OpenNext.js:
+
+```bash
+npm run build:worker
+npm run deploy
+```
+
+Configuration files:
+- `wrangler.jsonc` - Cloudflare Workers configuration
+- `open-next.config.ts` - OpenNext.js configuration
+
+## Contributing
+
+1. Create a new branch for your changes
+2. Make your changes
+3. Test locally with `npm run dev`
+4. Run linting: `npm run lint`
+5. Format code: `npm run format`
+6. Submit a pull request
+
+## License
+
+Private - Internal use only
+
+## Support
+
+For questions or issues, please contact the KYZN development team.

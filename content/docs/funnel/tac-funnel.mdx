@@ -1,0 +1,178 @@
+---
+title: TAC Funnel
+description: Time Actual Count - Funnel berdasarkan tanggal aktual action dilakukan
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+TAC (Time Actual Count) adalah funnel yang menghitung data berdasarkan **tanggal aktual** ketika action dilakukan.
+
+## Perbedaan TAC vs TCC
+
+<Callout type="info">
+**TAC** = Data dihitung berdasarkan tanggal action terjadi (aktual)
+
+**TCC** = Data dihitung berdasarkan tanggal inbound/cohort (semua metric mengikuti tanggal leads masuk)
+</Callout>
+
+## Funnel Columns Definition
+
+<TypeTable
+  type={{
+    date: {
+      description: 'User: System',
+      type: 'Tanggal aktual ketika action dilakukan',
+      default: ''
+    },
+    inbound: {
+      description: 'Mendapatkan leads yang tepat sesuai persona KYZN, memperluas saluran akuisisi',
+      type: 'Semua data kontak yang masuk (dihitung pada tanggal aktual masuk)',
+      default: 'Joan'
+    },
+    leads: {
+      description: 'Memastikan semua contact di follow up',
+      type: 'Data kontak yang menunjukkan ketertarikan (dihitung pada tanggal aktual)',
+      default: 'Lutfi'
+    },
+    mql: {
+      description: 'Memastikan contact memiliki ketertarikan untuk janji temu',
+      type: 'Jumlah appointment yang dibuat (dihitung pada tanggal aktual dibuat)',
+      default: 'Lutfi'
+    },
+    appt: {
+      description: 'Memastikan sebanyak mungkin janji temu Trial/Tour',
+      type: 'Jumlah appointment (dihitung pada tanggal aktual appointment)',
+      default: 'Lutfi'
+    },
+    mqlplus: {
+      description: 'Memastikan Tour/Trial datang dan dijelaskan program KYZN',
+      type: 'Jumlah appointment yang datang (dihitung pada tanggal aktual datang)',
+      default: 'Roy, Yovita'
+    },
+    tourplus: {
+      description: 'Memastikan trial tidak mengalami feedback negatif',
+      type: 'Jumlah Free Trial dengan Negative Trial (dihitung pada tanggal aktual trial)',
+      default: 'Shierra, Zain, Usep'
+    },
+    trialplus: {
+      description: 'Memastikan trial mengalami feedback positif/"Fantastic"',
+      type: 'Jumlah Free Trial dengan Positive Trial (dihitung pada tanggal aktual trial)',
+      default: 'Shierra, Zain, Usep'
+    },
+    convert: {
+      description: 'Memastikan semua trial convert menjadi member',
+      type: 'Jumlah member yang convert (dihitung pada tanggal aktual convert)',
+      default: 'Roy, Yovita'
+    },
+  }}
+/>
+
+<Callout type="warn">
+1 Kontak bisa memiliki lebih dari 1 appointment
+</Callout>
+
+## Calculated Columns
+
+<TypeTable
+  type={{
+    'leads %': {
+      description: '',
+      type: 'Persentase Inbound → Leads. Tingkat keingintahuan calon pelanggan',
+      default: 'Formula: leads / inbound'
+    },
+    'MQL %': {
+      description: '',
+      type: 'Persentase Leads → MQL. Tingkat ketertarikan terhadap fasilitas/program',
+      default: 'Formula: mql / leads'
+    },
+    'MQL+ %': {
+      description: '',
+      type: 'Persentase MQL → MQL+. Tingkat kehadiran terhadap janji temu',
+      default: 'Formula: mqlPlus / mql'
+    },
+    'Tour+ %': {
+      description: '',
+      type: 'Persentase MQL+ → Tour+. Tingkat ketertarikan dari Tour ke Trial',
+      default: 'Formula: tourPlus / mqlPlus'
+    },
+    'Trial+ %': {
+      description: '',
+      type: 'Persentase Tour+ → Trial+. Tingkat kepuasan pelanggan',
+      default: 'Formula: trialPlus / tourPlus'
+    },
+    'Convert %': {
+      description: '',
+      type: 'Persentase Trial+ → Convert. Efektivitas Trial terhadap conversion',
+      default: 'Formula: convert / trialPlus'
+    },
+  }}
+/>
+
+
+## FAQ
+
+<Accordions>
+<Accordion title="Kapan sebaiknya menggunakan TAC Funnel?">
+TAC Funnel sebaiknya digunakan ketika Anda ingin melihat **performa harian** atau **aktivitas real-time** dari tim. Misalnya: "Berapa banyak appointment yang dibuat hari ini?" atau "Berapa conversion yang terjadi minggu ini?"
+</Accordion>
+
+<Accordion title="Apa perbedaan utama TAC dengan TCC?">
+**TAC** menghitung berdasarkan tanggal action terjadi (aktual), sedangkan **TCC** menghitung semua metric berdasarkan tanggal inbound (cohort). TAC untuk melihat aktivitas harian, TCC untuk melihat performa cohort leads.
+</Accordion>
+
+<Accordion title="Berapa banyak inbound yang masuk di tanggal tersebut dan convert?">
+Pada TAC Funnel, Anda hanya bisa melihat berapa banyak inbound pada hari itu dan berapa banyak conversion pada hari itu, tapi semua angka itu **tidak terkait** karena TAC adalah aktual time bukan TCC.
+
+Contoh: Pada tanggal 01 Januari 2025 customer "Lutfi" convert, tapi Lutfi belum tentu inbound di tanggal 01 Januari 2025. Yang dihitung adalah tanggal convert, bukan tanggal inbound.
+</Accordion>
+
+<Accordion title="Mengapa jumlah leads di TAC berbeda dengan TCC pada tanggal yang sama?">
+Karena TAC menghitung leads yang **menunjukkan ketertarikan pada tanggal tersebut**, sedangkan TCC menghitung leads berdasarkan **tanggal mereka pertama kali masuk** (inbound). Satu leads bisa masuk tanggal 1 Jan tapi baru menunjukkan ketertarikan tanggal 5 Jan.
+</Accordion>
+
+<Accordion title="Bagaimana cara membaca conversion rate di TAC?">
+Conversion rate di TAC **tidak bisa langsung dibaca** karena inbound dan convert di tanggal yang sama belum tentu dari cohort yang sama. Gunakan TCC untuk melihat conversion rate yang akurat dari satu cohort.
+</Accordion>
+
+<Accordion title="Kenapa 1 kontak bisa memiliki lebih dari 1 appointment di TAC?">
+Satu kontak bisa membuat beberapa appointment untuk program yang berbeda atau reschedule appointment. TAC menghitung semua appointment yang dibuat pada tanggal tersebut, bukan unique contact.
+</Accordion>
+
+<Accordion title="Apa kegunaan TAC untuk evaluasi performa tim?">
+TAC berguna untuk melihat **produktivitas harian tim**. Misalnya: "Berapa banyak appointment yang dibuat Lutfi hari ini?" atau "Berapa trial yang dilakukan Shierra minggu ini?"
+</Accordion>
+
+<Accordion title="Bagaimana TAC membantu dalam meeting harian?">
+TAC menampilkan aktivitas real-time, sehingga cocok untuk meeting harian. Tim bisa melihat: "Kemarin kita dapat 10 inbound, 8 leads, 5 appointment dibuat, dan 2 convert."
+</Accordion>
+
+<Accordion title="Apakah TAC bisa digunakan untuk forecasting?">
+**Tidak disarankan**. TAC lebih cocok untuk monitoring aktivitas harian. Untuk forecasting dan prediksi conversion rate, gunakan TCC karena menunjukkan performa cohort yang lebih akurat.
+</Accordion>
+
+<Accordion title="Mengapa angka MQL dan Appt di TAC bisa berbeda?">
+MQL adalah jumlah appointment yang **dibuat/dijadwalkan**, sedangkan Appt adalah jumlah appointment yang **terjadwal pada hari itu**. Satu appointment bisa dibuat hari ini tapi dijadwalkan minggu depan.
+</Accordion>
+
+<Accordion title="Bagaimana cara tracking performa campaign di TAC?">
+TAC kurang cocok untuk tracking campaign karena tidak melihat journey lengkap. Lebih baik gunakan TCC untuk melihat berapa leads dari campaign tertentu yang akhirnya convert.
+</Accordion>
+
+<Accordion title="Apa yang dimaksud dengan 'tanggal aktual' di TAC?">
+Tanggal aktual adalah tanggal ketika **action benar-benar terjadi**. Misalnya: tanggal leads menunjukkan ketertarikan, tanggal appointment dibuat, tanggal trial dilakukan, atau tanggal customer convert.
+</Accordion>
+
+<Accordion title="Kenapa total inbound TAC dan TCC dalam 1 bulan bisa berbeda?">
+Seharusnya **sama** jika dihitung dalam periode yang sama, karena inbound di kedua funnel dihitung pada tanggal masuk. Perbedaan bisa terjadi jika ada perbedaan filter atau periode yang dihitung.
+</Accordion>
+
+<Accordion title="Bagaimana TAC membantu identifikasi bottleneck harian?">
+TAC menunjukkan aktivitas harian, sehingga bisa terlihat jika ada hari tertentu dengan performa rendah. Misalnya: "Kenapa hari Senin selalu sedikit appointment?" atau "Kenapa conversion rate Jumat rendah?"
+</Accordion>
+
+<Accordion title="Apakah TAC cocok untuk laporan bulanan ke management?">
+TAC lebih cocok untuk **laporan operasional harian/mingguan**. Untuk laporan bulanan ke management, kombinasikan TAC (untuk aktivitas) dengan TCC (untuk conversion rate dan ROI campaign).
+</Accordion>
+</Accordions>

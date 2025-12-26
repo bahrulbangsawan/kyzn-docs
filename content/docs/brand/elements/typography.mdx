@@ -1,0 +1,79 @@
+---
+title: Typography
+description: Menjelaskan penggunaan font dan penerapannya
+---
+
+# Typography
+
+Typography yang konsisten membantu membangun identitas brand yang kuat dan meningkatkan keterbacaan konten.
+
+## Font Utama
+
+### Inter
+Font utama yang digunakan untuk semua teks di platform KYZN.
+
+```css
+font-family: 'Inter', sans-serif;
+```
+
+**Karakteristik:**
+- Sans-serif modern
+- Keterbacaan tinggi di layar
+- Mendukung berbagai bahasa
+- Tersedia dalam berbagai weight
+
+## Font Weights
+
+| Weight | Penggunaan |
+|--------|------------|
+| 400 (Regular) | Body text, paragraf |
+| 500 (Medium) | Subtitle, label |
+| 600 (Semibold) | Heading kecil, emphasis |
+| 700 (Bold) | Heading utama, judul |
+
+## Ukuran Font
+
+### Heading
+- H1: 36px / 2.25rem
+- H2: 30px / 1.875rem
+- H3: 24px / 1.5rem
+- H4: 20px / 1.25rem
+
+### Body
+- Large: 18px / 1.125rem
+- Regular: 16px / 1rem
+- Small: 14px / 0.875rem
+- XSmall: 12px / 0.75rem
+
+## Line Height
+
+- Heading: 1.2 - 1.3
+- Body text: 1.5 - 1.6
+- UI elements: 1.4
+
+## Penerapan
+
+### Heading
+```css
+.heading-1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+```
+
+### Body Text
+```css
+.body-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+```
+
+## Best Practices
+
+- Gunakan maksimal 2-3 ukuran font dalam satu halaman
+- Pastikan kontras yang cukup antara teks dan background
+- Hindari teks yang terlalu panjang per baris (ideal: 60-80 karakter)
+- Gunakan weight yang tepat untuk hierarki visual

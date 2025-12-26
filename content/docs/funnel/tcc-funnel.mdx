@@ -1,0 +1,173 @@
+---
+title: TCC Funnel
+description: Time Cohort Count - Funnel berdasarkan tanggal inbound/data masuk
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+TCC (Time Cohort Count) adalah funnel yang menghitung data berdasarkan **tanggal inbound** atau tanggal data masuk.
+
+## Perbedaan TAC vs TCC
+
+<Callout type="info">
+**TAC** = Data dihitung berdasarkan tanggal action terjadi (aktual)
+
+**TCC** = Data dihitung berdasarkan tanggal inbound/cohort (semua metric mengikuti tanggal leads masuk)
+</Callout>
+
+## Funnel Columns Definition
+
+<TypeTable
+  type={{
+    date: {
+      description: 'User: System',
+      type: 'Tanggal inbound/cohort (tanggal leads masuk pertama kali)',
+      default: ''
+    },
+    inbound: {
+      description: 'Mendapatkan leads yang tepat sesuai persona KYZN, memperluas saluran akuisisi',
+      type: 'Semua data kontak yang masuk (dihitung berdasarkan tanggal inbound)',
+      default: 'Joan'
+    },
+    leads: {
+      description: 'Memastikan semua contact di follow up',
+      type: 'Data kontak yang menunjukkan ketertarikan (dihitung berdasarkan tanggal inbound)',
+      default: 'Lutfi'
+    },
+    mql: {
+      description: 'Memastikan contact memiliki ketertarikan untuk janji temu',
+      type: 'Jumlah appointment (dihitung berdasarkan tanggal inbound)',
+      default: 'Lutfi'
+    },
+    appt: {
+      description: 'Memastikan sebanyak mungkin janji temu Trial/Tour',
+      type: 'Jumlah appointment (dihitung berdasarkan tanggal inbound)',
+      default: 'Lutfi'
+    },
+    mqlplus: {
+      description: 'Memastikan Tour/Trial datang dan dijelaskan program KYZN',
+      type: 'Jumlah appointment yang datang (dihitung berdasarkan tanggal inbound)',
+      default: 'Roy, Yovita'
+    },
+    tourplus: {
+      description: 'Memastikan trial tidak mengalami feedback negatif',
+      type: 'Jumlah Free Trial dengan Negative Trial (dihitung berdasarkan tanggal inbound)',
+      default: 'Shierra, Zain, Usep'
+    },
+    trialplus: {
+      description: 'Memastikan trial mengalami feedback positif/"Fantastic"',
+      type: 'Jumlah Free Trial dengan Positive Trial (dihitung berdasarkan tanggal inbound)',
+      default: 'Shierra, Zain, Usep'
+    },
+    convert: {
+      description: 'Memastikan semua trial convert menjadi member',
+      type: 'Jumlah member yang convert (dihitung berdasarkan tanggal inbound)',
+      default: 'Roy, Yovita'
+    },
+  }}
+/>
+
+## Calculated Columns
+
+<TypeTable
+  type={{
+    'leads %': {
+      description: '',
+      type: 'Persentase Inbound → Leads. Tingkat keingintahuan calon pelanggan',
+      default: 'Formula: leads / inbound'
+    },
+    'MQL %': {
+      description: '',
+      type: 'Persentase Leads → MQL. Tingkat ketertarikan terhadap fasilitas/program',
+      default: 'Formula: mql / leads'
+    },
+    'MQL+ %': {
+      description: '',
+      type: 'Persentase MQL → MQL+. Tingkat kehadiran terhadap janji temu',
+      default: 'Formula: mqlPlus / mql'
+    },
+    'Tour+ %': {
+      description: '',
+      type: 'Persentase MQL+ → Tour+. Tingkat ketertarikan dari Tour ke Trial',
+      default: 'Formula: tourPlus / mqlPlus'
+    },
+    'Trial+ %': {
+      description: '',
+      type: 'Persentase Tour+ → Trial+. Tingkat kepuasan pelanggan',
+      default: 'Formula: trialPlus / tourPlus'
+    },
+    'Convert %': {
+      description: '',
+      type: 'Persentase Trial+ → Convert. Efektivitas Trial terhadap conversion',
+      default: 'Formula: convert / trialPlus'
+    },
+  }}
+/>
+
+## FAQ
+
+<Accordions>
+<Accordion title="Kapan sebaiknya menggunakan TCC Funnel?">
+TCC Funnel sebaiknya digunakan ketika Anda ingin melihat **performa cohort** atau **conversion journey** dari leads. Misalnya: "Dari 100 leads yang masuk tanggal 1 Jan, berapa yang akhirnya convert?" atau "Berapa conversion rate campaign bulan ini?"
+</Accordion>
+
+<Accordion title="Apa perbedaan utama TCC dengan TAC?">
+**TCC** menghitung semua metric berdasarkan tanggal inbound (cohort), sedangkan **TAC** menghitung berdasarkan tanggal action terjadi (aktual). TCC untuk melihat performa cohort, TAC untuk melihat aktivitas harian.
+</Accordion>
+
+<Accordion title="Berapa banyak inbound yang masuk di tanggal tersebut dan convert?">
+Pada TCC Funnel, jika leads masuk pada 25 Desember dan konversi terjadi pada 1 Januari, maka analytics akan mencatat konversinya pada **25 Desember**.
+
+**Cara membaca:** Leads yang masuk pada 25 Desember telah berhasil convert.
+</Accordion>
+
+<Accordion title="Mengapa semua metric di TCC mengikuti tanggal inbound?">
+Karena TCC dirancang untuk melihat **journey lengkap** dari satu cohort leads. Dengan mengikuti tanggal inbound, kita bisa melihat: "Dari leads yang masuk tanggal X, berapa % yang jadi appointment, trial, dan convert?"
+</Accordion>
+
+<Accordion title="Bagaimana cara menghitung conversion rate yang akurat?">
+Gunakan TCC! Karena semua metric mengikuti tanggal inbound, conversion rate di TCC menunjukkan **performa sebenarnya** dari satu cohort. Misalnya: Convert % = jumlah convert / jumlah trial+ dari cohort yang sama.
+</Accordion>
+
+<Accordion title="Berapa lama waktu yang dibutuhkan untuk melihat conversion rate final di TCC?">
+Tergantung **sales cycle** Anda. Jika rata-rata leads convert dalam 30 hari, maka conversion rate cohort akan stabil setelah 30 hari. Data cohort terbaru masih bisa berubah karena masih dalam proses.
+</Accordion>
+
+<Accordion title="Apa kegunaan TCC untuk evaluasi campaign marketing?">
+TCC sangat berguna untuk evaluasi campaign karena bisa melihat **ROI sebenarnya**. Misalnya: "Campaign Instagram bulan lalu dapat 200 inbound, berapa yang akhirnya convert?" - semua dihitung dari cohort yang sama.
+</Accordion>
+
+<Accordion title="Mengapa angka convert di TCC untuk tanggal kemarin masih bisa berubah?">
+Karena leads yang masuk kemarin **masih dalam proses**. Mereka bisa convert besok, minggu depan, atau bulan depan. Angka convert akan terus bertambah sampai cohort tersebut selesai sales cycle-nya.
+</Accordion>
+
+<Accordion title="Bagaimana TCC membantu dalam budget planning?">
+TCC menunjukkan conversion rate historis dari setiap cohort, sehingga bisa digunakan untuk **prediksi**. Misalnya: "Jika conversion rate rata-rata 10%, untuk dapat 50 member butuh 500 inbound."
+</Accordion>
+
+<Accordion title="Apakah TCC bisa digunakan untuk daily monitoring?">
+**Kurang cocok**. TCC lebih cocok untuk analisis mingguan/bulanan karena data cohort terbaru masih berubah. Untuk daily monitoring aktivitas tim, gunakan TAC.
+</Accordion>
+
+<Accordion title="Bagaimana cara membandingkan performa antar bulan di TCC?">
+Bandingkan conversion rate (leads %, MQL %, Convert %, dll) antar bulan. Misalnya: "Bulan ini conversion rate 12%, bulan lalu 10%" - ini menunjukkan improvement karena dihitung dari cohort yang sama.
+</Accordion>
+
+<Accordion title="Kenapa jumlah appointment di TCC bisa lebih banyak dari leads?">
+Karena **1 leads bisa membuat lebih dari 1 appointment**. Misalnya: Satu leads bisa appointment untuk trial kids dan trial adult. TCC menghitung semua appointment dari cohort tersebut.
+</Accordion>
+
+<Accordion title="Apa yang dimaksud dengan 'cohort' di TCC?">
+Cohort adalah **kelompok leads yang masuk pada tanggal yang sama**. TCC melacak journey lengkap cohort tersebut dari inbound sampai convert, tidak peduli berapa lama prosesnya.
+</Accordion>
+
+<Accordion title="Bagaimana TCC membantu identifikasi masalah di funnel?">
+TCC menunjukkan **drop-off rate** di setiap stage. Misalnya: "Leads % tinggi (80%) tapi MQL % rendah (20%)" - berarti masalah ada di follow-up atau kualitas leads.
+</Accordion>
+
+<Accordion title="Apakah TCC cocok untuk laporan ke investor atau management?">
+**Sangat cocok!** TCC menunjukkan conversion rate dan ROI yang akurat karena melacak journey lengkap cohort. Investor ingin tahu: "Dari 1000 leads, berapa yang jadi paying customer?" - TCC menjawab ini.
+</Accordion>
+</Accordions>

@@ -1,7 +1,6 @@
 import { getPageImage, source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
-import { generate as DefaultImage } from 'fumadocs-ui/og';
 
 export const revalidate = false;
 
@@ -14,11 +13,76 @@ export async function GET(
   if (!page) notFound();
 
   return new ImageResponse(
-    <DefaultImage
-      title={page.data.title}
-      description={page.data.description}
-      site="KYZN Docs"
-    />,
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#000000',
+        padding: '60px',
+      }}
+    >
+      {/* KYZN Logo - text based */}
+      <div
+        style={{
+          fontSize: '32px',
+          fontWeight: 700,
+          color: '#ffffff',
+          letterSpacing: '0.1em',
+        }}
+      >
+        KYZN
+      </div>
+      
+      {/* Content area */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          flex: 1,
+          justifyContent: 'center',
+          gap: '20px',
+        }}
+      >
+        {/* Title */}
+        <div
+          style={{
+            fontSize: '56px',
+            fontWeight: 700,
+            color: '#ffffff',
+            lineHeight: 1.2,
+            maxWidth: '900px',
+          }}
+        >
+          {page.data.title}
+        </div>
+        
+        {/* Description */}
+        {page.data.description && (
+          <div
+            style={{
+              fontSize: '24px',
+              color: '#a1a1aa',
+              lineHeight: 1.4,
+              maxWidth: '800px',
+            }}
+          >
+            {page.data.description}
+          </div>
+        )}
+      </div>
+      
+      {/* Footer */}
+      <div
+        style={{
+          fontSize: '18px',
+          color: '#71717a',
+        }}
+      >
+        docs.kyzn.life
+      </div>
+    </div>,
     {
       width: 1200,
       height: 630,

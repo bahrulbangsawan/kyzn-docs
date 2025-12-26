@@ -1,0 +1,169 @@
+---
+title: Funnel
+description: Sistem tracking dan analisis customer journey dari inbound hingga conversion
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import Mermaid from '@/components/mermaid';
+
+Funnel adalah sistem tracking yang memvisualisasikan **customer journey** dari leads pertama kali masuk (inbound) hingga menjadi paying member (convert).
+
+## Kenapa Funnel Penting?
+
+<Callout type="info">
+Funnel membantu tim mengidentifikasi **bottleneck** di setiap tahap customer journey dan mengoptimalkan conversion rate.
+</Callout>
+
+- **Visibility**: Melihat performa setiap stage secara real-time
+- **Accountability**: Setiap stage memiliki PIC yang bertanggung jawab
+- **Optimization**: Identifikasi drop-off rate dan area improvement
+- **Forecasting**: Prediksi revenue berdasarkan conversion rate historis
+
+## Customer Journey Flow
+
+<Mermaid
+  chart={`graph LR
+    A[Inbound] --> B[Leads]
+    B --> C[MQL]
+    C --> D[MQL+]
+    D --> E[Tour+]
+    E --> F[Trial+]
+    F --> G[Convert]
+    
+    style A fill:#94a3b8,stroke:#64748b,color:#000
+    style B fill:#94a3b8,stroke:#64748b,color:#000
+    style C fill:#94a3b8,stroke:#64748b,color:#000
+    style D fill:#94a3b8,stroke:#64748b,color:#000
+    style E fill:#94a3b8,stroke:#64748b,color:#000
+    style F fill:#94a3b8,stroke:#64748b,color:#000
+    style G fill:#64748b,stroke:#475569,color:#fff`}
+/>
+
+## Funnel Stages
+
+<Steps>
+<Step>
+### Inbound
+Semua data kontak yang masuk dari berbagai source (Meta Ads, Organic, Event, Referral, dll)
+
+**PIC:** Joan
+</Step>
+
+<Step>
+### Leads
+Data kontak yang menunjukkan ketertarikan terhadap program KYZN
+
+**PIC:** Lutfi
+</Step>
+
+<Step>
+### MQL (Marketing Qualified Lead)
+Appointment yang berhasil dibuat oleh tim sales
+
+**PIC:** Lutfi
+</Step>
+
+<Step>
+### MQL+ (Appointment Show)
+Customer yang datang dan bertemu dengan PIC
+
+**PIC:** Roy, Yovita
+</Step>
+
+<Step>
+### Tour+
+Customer yang melakukan Free Trial (termasuk yang memberikan feedback negatif)
+
+**PIC:** Shierra, Zain, Usep
+</Step>
+
+<Step>
+### Trial+
+Customer yang melakukan Free Trial dengan feedback positif atau "Fantastic"
+
+**PIC:** Shierra, Zain, Usep
+</Step>
+
+<Step>
+### Convert
+Customer yang berhasil menjadi paying member
+
+**PIC:** Roy, Yovita
+</Step>
+</Steps>
+
+## Tipe Funnel
+
+<Tabs items={['TAC Funnel', 'TCC Funnel']}>
+<Tab value="TAC Funnel">
+
+### Time Actual Count (TAC)
+
+Menghitung data berdasarkan **tanggal aktual** ketika action dilakukan.
+
+**Kegunaan:**
+- Monitoring aktivitas harian tim
+- Daily standup meeting
+- Tracking produktivitas real-time
+- Laporan operasional mingguan
+
+**Contoh:**
+> Tanggal 15 Jan: 10 inbound masuk, 5 appointment dibuat, 3 customer convert
+> 
+> (Inbound, appointment, dan convert di atas **tidak terkait** satu sama lain)
+
+[Lihat TAC Funnel →](/docs/funnel/tac-funnel)
+
+</Tab>
+<Tab value="TCC Funnel">
+
+### Time Cohort Count (TCC)
+
+Menghitung data berdasarkan **tanggal inbound** (cohort tracking).
+
+**Kegunaan:**
+- Analisis conversion rate campaign
+- Evaluasi performa cohort
+- Budget planning & forecasting
+- Laporan ke investor/management
+
+**Contoh:**
+> Cohort 15 Jan: 100 inbound → 80 leads → 40 MQL → 20 convert
+> 
+> (Semua metric mengikuti tanggal inbound yang sama)
+
+[Lihat TCC Funnel →](/docs/funnel/tcc-funnel)
+
+</Tab>
+</Tabs>
+
+## Conversion Rate Metrics
+
+<Mermaid
+  chart={`graph LR
+    A[Inbound 100] --> B[Leads 80]
+    B --> C[MQL 40]
+    C --> D[MQL+ 30]
+    D --> E[Tour+ 27]
+    E --> F[Trial+ 23]
+    F --> G[Convert 15]
+    
+    style A fill:#94a3b8,stroke:#64748b,color:#000
+    style B fill:#94a3b8,stroke:#64748b,color:#000
+    style C fill:#94a3b8,stroke:#64748b,color:#000
+    style D fill:#94a3b8,stroke:#64748b,color:#000
+    style E fill:#94a3b8,stroke:#64748b,color:#000
+    style F fill:#94a3b8,stroke:#64748b,color:#000
+    style G fill:#64748b,stroke:#475569,color:#fff`}
+/>
+
+<Callout type="warn">
+Conversion rate di atas adalah **contoh ilustrasi**. Gunakan TCC Funnel untuk melihat conversion rate aktual dari cohort Anda.
+</Callout>
+
+## Quick Links
+
+- [TAC Funnel](/docs/funnel/tac-funnel) - Tracking aktivitas harian
+- [TCC Funnel](/docs/funnel/tcc-funnel) - Analisis cohort & conversion

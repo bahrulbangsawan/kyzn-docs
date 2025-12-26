@@ -1,0 +1,12 @@
+{
+  "title": "Funnel",
+  "description": "Funnel documentation and guides",
+  "root": true,
+  "pages": [
+    "---Intro---",
+    "index",
+    "---Funnels---",
+    "tac-funnel",
+    "tcc-funnel"
+  ]
+}

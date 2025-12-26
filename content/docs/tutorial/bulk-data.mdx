@@ -1,0 +1,279 @@
+---
+title: Event Bulk Data
+description: Standarisasi file dan format data untuk bulk upload event leads
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<Callout type="info">
+Copy file templatenya disini: [Template Bulk Data](https://docs.google.com/spreadsheets/u/2/d/1fhiIKpl1I--k87CfGaBxvxje1cy0Hy0P5UQUeRxNWws/copy)
+</Callout>
+
+### Tampilan Template
+
+<Callout type="warn">
+Yang perlu diperhatikan: **nama file**, kolom merah **wajib diisi**, dan kolom hijau **tidak wajib diisi**.
+</Callout>
+
+<Callout type="error">
+Jangan merubah nama kolom!
+</Callout>
+
+### Standarisasi Column
+
+<Tabs items={['Wajib Diisi', 'Tidak Wajib Diisi']}>
+<Tab value="Wajib Diisi">
+
+<TypeTable
+  type={{
+    timestamp: {
+      description: 'Format tanggal ISO 8601, SQL standard. [YYYY-MM-DD hh:mm:ss]',
+      type: 'string',
+      default: '2025-02-04 07:37:16'
+    },
+    branch: {
+      description: 'Hanya KYZN BSD atau KYZN Kuningan',
+      type: 'string',
+      default: 'KYZN Kuningan'
+    },
+    name: {
+      description: 'Tidak boleh kosong, hanya huruf. Capitalized Case.',
+      type: 'string',
+      default: 'Bahrul Bangsawan'
+    },
+    phone: {
+      description: 'Dimulai dari 628 bukan 8',
+      type: 'string',
+      default: '6282129505610'
+    },
+    source: {
+      description: 'Menggunakan standarisasi dari tracking framework',
+      type: 'string',
+      default: 'paid_event'
+    },
+    sremarks: {
+      description: 'Jika paid_event, inhouse_event, free_event, booth_event, gunakan event_id. Jika meta_ads, gunakan adset_id',
+      type: 'string',
+      default: '220240115-1705303680--open-booth-dekhad'
+    },
+    medium: {
+      description: 'Menggunakan standarisasi dari tracking framework',
+      type: 'string',
+      default: 'event_form'
+    },
+    mremarks: {
+      description: 'Menggunakan standarisasi dari tracking framework',
+      type: 'string',
+      default: 'wa'
+    },
+    contact_owner: {
+      description: 'PIC yang mendapatkan leads tersebut',
+      type: 'string',
+      default: 'Siska'
+    },
+    interest: {
+      description: 'Menggunakan standarisasi kategori interest',
+      type: 'string',
+      default: 'Membership Kids'
+    },
+    interest_remarks: {
+      description: 'Menggunakan standarisasi interest remarks',
+      type: 'string',
+      default: 'Academy Pass 12 Months'
+    }
+  }}
+/>
+
+</Tab>
+<Tab value="Tidak Wajib Diisi">
+
+<TypeTable
+  type={{
+    email: {
+      description: 'Email harus jelas dan dapat dihubungi',
+      type: 'string',
+      default: 'hello@kyzn.life'
+    },
+    dob: {
+      description: 'Format tanggal ISO 8601. [YYYY-MM-DD]',
+      type: 'string',
+      default: '1999-12-26'
+    },
+    content: {
+      description: 'Informasi konten atau material yang dilihat customer',
+      type: 'string',
+      default: 'https://www.instagram.com/p/DFmuV7UpLYp/'
+    },
+    pic: {
+      description: 'Nama assigned_pic yang akan menghubungi customer',
+      type: 'string',
+      default: 'Desra'
+    },
+    gender: {
+      description: 'Male atau Female. Huruf kapital, tidak boleh bahasa Indonesia',
+      type: 'string',
+      default: 'Male'
+    }
+  }}
+/>
+
+</Tab>
+</Tabs>
+
+### Terminologi Event
+
+<Tabs items={['Definition', 'Category']}>
+<Tab value="Definition">
+
+<TypeTable
+  type={{
+    paid_event: {
+      description: 'Acara berbayar (ticketing/sewa venue) yang menghasilkan revenue. Contoh: Birthday Party, Competition, Gathering, Open Class Berbayar',
+      type: 'string',
+      default: 'Activation'
+    },
+    free_event: {
+      description: 'Acara gratis dengan konsep barter value atau kemitraan. Contoh: Open Class Free',
+      type: 'string',
+      default: 'Activation'
+    },
+    booth_event: {
+      description: 'Acara dengan booth di mall atau area publik untuk menjangkau audiens lebih luas',
+      type: 'string',
+      default: 'Acquisition activities'
+    },
+    inhouse_event: {
+      description: 'Acara internal KYZN untuk menarik leads atau memenuhi kebutuhan member',
+      type: 'string',
+      default: '-'
+    }
+  }}
+/>
+
+</Tab>
+<Tab value="Category">
+
+| Category | Event Category | Source | Event Type |
+|----------|---------------|--------|------------|
+| B2B | Free Event | `free_event` | Anniversary, Gathering, Seminar, Talk Show, Town Hall, Competition, Sports Non-Competition |
+| B2B | Paid Event | `paid_event` | Anniversary, Gathering, Seminar, Talk Show, Town Hall, Competition, Sports Non-Competition |
+| B2C | Free Event | `free_event` | Birthday Party |
+| B2C | Paid Event | `paid_event` | Birthday Party |
+| Internal | Free Event | `free_event` | *[custom]* |
+| Internal | Paid Event | `paid_event` | *[custom]* |
+| Internal | Booth Event | `booth_event` | *[custom]* |
+| Internal | Inhouse Event | `inhouse_event` | Open House, Holiday Camp, Grading Week, Competition, Celebration Day, Season Event, Anniversary |
+
+</Tab>
+</Tabs>
+
+## Cleaning Data
+
+<Steps>
+<Step>
+### Format Column `timestamp`
+
+<Callout type="info">
+Menggunakan format tanggal [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601): `YYYY-MM-DD hh:mm:ss`
+</Callout>
+
+1. Block column B
+2. Klik `More Format` (icon `123`)
+3. Pilih date time format `YYYY-MM-DD hh:mm:ss` atau `2025-02-04 07:37:16`
+4. Selesai
+</Step>
+
+<Step>
+### Rapihkan Column `phone`
+
+Pastikan nomor telepon dimulai dengan `628` bukan `8`.
+
+Gunakan **Rubot → Data Processing → Cleaning Phone Numbers**
+</Step>
+
+<Step>
+### Rapihkan Column `name`
+
+Gunakan **Rubot → Data Processing → Cleaning Text**
+</Step>
+
+<Step>
+### Penyesuaian `source`, `sremarks`, `medium`, `mremarks`
+
+<Callout type="error">
+Jika event belum dibuat di Event Manager [budget.kyzn.life](https://budget.kyzn.life/dl/event-manager), input event tersebut dulu untuk mendapatkan `sremarks` dari `event_id`
+</Callout>
+
+**Cara Mengcopy `event_id`:**
+1. Buka https://budget.kyzn.life/dl/event-manager
+2. Klik Event detail terkait
+3. Klik `Copy`
+
+<TypeTable
+  type={{
+    source: {
+      description: 'Copy dari Event Manager',
+      type: 'string',
+      default: 'free_event'
+    },
+    sremarks: {
+      description: 'Copy dari Event Manager',
+      type: 'string',
+      default: '220240115-1705303680--open-booth-dekhad'
+    },
+    medium: {
+      description: 'Mengikuti framework medium',
+      type: 'string',
+      default: 'bulk_data'
+    },
+    mremarks: {
+      description: 'Mengikuti framework medium',
+      type: 'string',
+      default: 'form'
+    }
+  }}
+/>
+</Step>
+
+<Step>
+### Penyesuaian `pic`, `contact_owner`, `interest`, `interest_remarks`
+
+<TypeTable
+  type={{
+    pic: {
+      description: 'Nama assigned_pic yang akan menghubungi customer',
+      type: 'string',
+      default: 'Ulfa'
+    },
+    contact_owner: {
+      description: 'PIC yang mendapatkan leads tersebut',
+      type: 'string',
+      default: 'Siska'
+    },
+    interest: {
+      description: 'Menggunakan standarisasi kategori interest',
+      type: 'string',
+      default: 'Membership Kids'
+    },
+    interest_remarks: {
+      description: 'Menggunakan standarisasi interest remarks',
+      type: 'string',
+      default: 'Academy Pass 12 Months'
+    }
+  }}
+/>
+</Step>
+
+<Step>
+### Hapus Duplicate
+
+1. Klik menu `Data`
+2. Pilih `Data clean-up`
+3. Pilih `Remove Duplicate`
+4. Hanya pilih `column E` (column `phone`)
+5. Klik `Remove Duplicate`
+</Step>
+</Steps>

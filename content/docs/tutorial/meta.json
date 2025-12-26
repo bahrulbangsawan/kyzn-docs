@@ -1,0 +1,11 @@
+{
+  "title": "Tutorial",
+  "description": "Tutorials and guides",
+  "root": true,
+  "pages": [
+    "---Intro---",
+    "index",
+    "---Data---",
+    "bulk-data"
+  ]
+}

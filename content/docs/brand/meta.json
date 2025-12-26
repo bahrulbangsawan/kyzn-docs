@@ -1,0 +1,10 @@
+{
+  "title": "Design System",
+  "description": "Design system documentation and guidelines",
+  "root": true,
+  "pages": [
+    "index",
+    "elements",
+    "guidelines"
+  ]
+}
