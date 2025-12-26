@@ -21,6 +21,31 @@ const config = {
       },
     ];
   },
+  webpack: (config, { isServer, webpack }) => {
+    if (isServer) {
+      // Ignore @vercel/og and WASM files completely to reduce bundle size
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /^@vercel\/og$/,
+        }),
+        new webpack.IgnorePlugin({
+          resourceRegExp: /next\/dist\/compiled\/@vercel\/og\/.*\.wasm$/,
+        }),
+        new webpack.IgnorePlugin({
+          resourceRegExp: /next\/dist\/compiled\/@vercel\/og\/.*\.ttf\.bin$/,
+        })
+      );
+      
+      // Also externalize to be safe
+      config.externals = config.externals || [];
+      if (Array.isArray(config.externals)) {
+        config.externals.push('@vercel/og');
+      } else {
+        config.externals = [config.externals, '@vercel/og'];
+      }
+    }
+    return config;
+  },
 };
 
 export default withMDX(config);

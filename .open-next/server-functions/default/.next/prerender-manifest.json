@@ -16,7 +16,6 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/_global-error",
       "dataRoute": "/_global-error.rsc",
-      "prefetchDataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -42,7 +41,6 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/_not-found",
       "dataRoute": "/_not-found.rsc",
-      "prefetchDataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -52,7 +50,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/": {
+    "/brand": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -65,9 +63,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/[[...slug]]",
-      "dataRoute": "/index.rsc",
-      "prefetchDataRoute": null,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -77,7 +74,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/sleekflow-whatsapp-auth": {
+    "/brand/elements/color": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -90,9 +87,296 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/[[...slug]]",
-      "dataRoute": "/sleekflow-whatsapp-auth.rsc",
-      "prefetchDataRoute": null,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand/elements/color.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/brand/elements/logo": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand/elements/logo.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/brand/elements/typography": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand/elements/typography.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/brand/guidelines/dimensions": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand/guidelines/dimensions.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/brand/guidelines/theme-css": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/brand/guidelines/theme-css.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/funnel": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/funnel.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/funnel/tac-funnel": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/funnel/tac-funnel.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/funnel/tcc-funnel": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/funnel/tcc-funnel.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/it": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/it.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/it/sleekflow-whatsapp-auth": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/it/sleekflow-whatsapp-auth.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/pd": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/pd.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/tutorial": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/tutorial.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/tutorial/bulk-data": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/[...slug]",
+      "dataRoute": "/tutorial/bulk-data.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -121,7 +405,6 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/llms-full.txt",
       "dataRoute": null,
-      "prefetchDataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -131,11 +414,10 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/og/image.png": {
+    "/llms.mdx/brand": {
       "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "image/png",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/og/layout,_N_T_/og/[...slug]/layout,_N_T_/og/[...slug]/route,_N_T_/og/image.png"
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand"
       },
       "experimentalBypassFor": [
         {
@@ -149,9 +431,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/og/[...slug]",
+      "srcRoute": "/llms.mdx/[[...slug]]",
       "dataRoute": null,
-      "prefetchDataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -161,11 +442,10 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/og/sleekflow-whatsapp-auth/image.png": {
+    "/llms.mdx/brand/elements/color": {
       "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "image/png",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/og/layout,_N_T_/og/[...slug]/layout,_N_T_/og/[...slug]/route,_N_T_/og/sleekflow-whatsapp-auth/image.png"
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand/elements/color"
       },
       "experimentalBypassFor": [
         {
@@ -179,9 +459,368 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/og/[...slug]",
+      "srcRoute": "/llms.mdx/[[...slug]]",
       "dataRoute": null,
-      "prefetchDataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/brand/elements/logo": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand/elements/logo"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/brand/elements/typography": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand/elements/typography"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/brand/guidelines/dimensions": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand/guidelines/dimensions"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/brand/guidelines/theme-css": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/brand/guidelines/theme-css"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/funnel": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/funnel"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/funnel/tac-funnel": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/funnel/tac-funnel"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/funnel/tcc-funnel": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/funnel/tcc-funnel"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/it": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/it"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/it/sleekflow-whatsapp-auth": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/it/sleekflow-whatsapp-auth"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/pd": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/pd"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/tutorial": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/tutorial"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/llms.mdx/tutorial/bulk-data": {
+      "initialHeaders": {
+        "content-type": "text/markdown",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/llms.mdx/layout,_N_T_/llms.mdx/[[...slug]]/layout,_N_T_/llms.mdx/[[...slug]]/route,_N_T_/llms.mdx/tutorial/bulk-data"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/llms.mdx/[[...slug]]",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/",
+      "dataRoute": "/index.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -193,7 +832,7 @@
     }
   },
   "dynamicRoutes": {
-    "/[[...slug]]": {
+    "/[...slug]": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -205,11 +844,11 @@
           "value": "multipart/form-data;.*"
         }
       ],
-      "routeRegex": "^(?:/(.+?))?(?:/)?$",
-      "dataRoute": "/[[...slug]].rsc",
+      "routeRegex": "^/(.+?)(?:/)?$",
+      "dataRoute": "/[...slug].rsc",
       "fallback": null,
       "fallbackRouteParams": [],
-      "dataRouteRegex": "^(?:/(.+?))?\\.rsc$",
+      "dataRouteRegex": "^/(.+?)\\.rsc$",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -220,7 +859,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/og/[...slug]": {
+    "/llms.mdx/[[...slug]]": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -232,7 +871,7 @@
           "value": "multipart/form-data;.*"
         }
       ],
-      "routeRegex": "^/og/(.+?)(?:/)?$",
+      "routeRegex": "^/llms\\.mdx(?:/(.+?))?(?:/)?$",
       "dataRoute": null,
       "fallback": null,
       "fallbackRouteParams": [],
@@ -250,8 +889,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "a205a776d23ff4e602edac5b117b89d1",
-    "previewModeSigningKey": "9530f4f26554ae97a4865831af5a3150ff393c43f5bdde1211aaf0ec5e59dcad",
-    "previewModeEncryptionKey": "392ba18733b7732cb978f07b3f819fb6671927fc1b68d6ebf92b43c4607dfc39"
+    "previewModeId": "991e3d0797c2ea38b0d17558966c6bde",
+    "previewModeSigningKey": "793760f8f1d4f1fd14feacdaeb40c1997510c3c881e9329a09823cdc5aace54c",
+    "previewModeEncryptionKey": "f6f19e58148a99fc714558ec92b672bf5ead05eae3d3eea1356f12cabc5cb7ce"
   }
 }

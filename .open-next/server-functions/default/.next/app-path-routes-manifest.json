@@ -1,8 +1,10 @@
 {
-  "/[[...slug]]/page": "/[[...slug]]",
+  "/[...slug]/page": "/[...slug]",
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
+  "/api/chat/route": "/api/chat",
   "/api/search/route": "/api/search",
   "/llms-full.txt/route": "/llms-full.txt",
-  "/og/[...slug]/route": "/og/[...slug]"
+  "/llms.mdx/[[...slug]]/route": "/llms.mdx/[[...slug]]",
+  "/page": "/"
 }

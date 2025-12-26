@@ -1,6 +1,7 @@
 {
   "version": 3,
   "pages404": true,
+  "appType": "app",
   "caseSensitive": false,
   "basePath": "",
   "redirects": [
@@ -16,28 +17,40 @@
   "headers": [],
   "rewrites": {
     "beforeFiles": [],
-    "afterFiles": [],
+    "afterFiles": [
+      {
+        "source": "/:path*.mdx",
+        "destination": "/llms.mdx/:path*",
+        "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?\\.mdx(?:/)?$"
+      }
+    ],
     "fallback": []
   },
   "dynamicRoutes": [
     {
-      "page": "/og/[...slug]",
-      "regex": "^/og/(.+?)(?:/)?$",
+      "page": "/llms.mdx/[[...slug]]",
+      "regex": "^/llms\\.mdx(?:/(.+?))?(?:/)?$",
       "routeKeys": {
         "nxtPslug": "nxtPslug"
       },
-      "namedRegex": "^/og/(?<nxtPslug>.+?)(?:/)?$"
+      "namedRegex": "^/llms\\.mdx(?:/(?<nxtPslug>.+?))?(?:/)?$"
     },
     {
-      "page": "/[[...slug]]",
-      "regex": "^(?:/(.+?))?(?:/)?$",
+      "page": "/[...slug]",
+      "regex": "^/(.+?)(?:/)?$",
       "routeKeys": {
         "nxtPslug": "nxtPslug"
       },
-      "namedRegex": "^(?:/(?<nxtPslug>.+?))?(?:/)?$"
+      "namedRegex": "^/(?<nxtPslug>.+?)(?:/)?$"
     }
   ],
   "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
     {
       "page": "/_global-error",
       "regex": "^/_global\\-error(?:/)?$",
@@ -49,6 +62,12 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/chat",
+      "regex": "^/api/chat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/chat(?:/)?$"
     },
     {
       "page": "/api/search",
@@ -71,7 +90,6 @@
     "didPostponeHeader": "x-nextjs-postponed",
     "contentTypeHeader": "text/x-component",
     "suffix": ".rsc",
-    "prefetchSuffix": ".prefetch.rsc",
     "prefetchSegmentHeader": "next-router-segment-prefetch",
     "prefetchSegmentSuffix": ".segment.rsc",
     "prefetchSegmentDirSuffix": ".segments",
