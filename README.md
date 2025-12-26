@@ -26,7 +26,7 @@ KYZN Docs is a comprehensive documentation platform that provides access to:
 - **UI Components**: Fumadocs UI, Radix UI
 - **Styling**: Tailwind CSS 4.1.16
 - **AI Chat**: AI SDK with OpenAI-compatible API
-- **Deployment**: Cloudflare (via OpenNext.js)
+- **Deployment**: Vercel
 
 ## Getting Started
 
@@ -78,7 +78,7 @@ docs-kyzn/
 ├── src/
 │   ├── app/              # Next.js app router
 │   │   ├── api/          # API routes (chat, search)
-│   │   └── [[...slug]]/  # Dynamic docs pages
+│   │   └── [...slug]/     # Dynamic docs pages
 │   ├── components/       # React components
 │   │   ├── search.tsx    # AI search/chat component
 │   │   └── ui/           # UI components
@@ -90,9 +90,6 @@ docs-kyzn/
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run build:worker` - Build for Cloudflare Workers
-- `npm run preview` - Preview Cloudflare build locally
-- `npm run deploy` - Deploy to Cloudflare
 - `npm run start` - Start production server
 - `npm run lint` - Run Biome linter
 - `npm run format` - Format code with Biome
@@ -144,18 +141,22 @@ Edit `src/lib/layout.shared.tsx` to customize:
 
 ## Deployment
 
-### Cloudflare Workers
+### Vercel
 
-This project is configured for deployment to Cloudflare Workers using OpenNext.js:
+This project is configured for deployment to Vercel:
 
+1. Connect your GitHub repository to Vercel
+2. Vercel will automatically detect Next.js and configure the build settings
+3. Deployments happen automatically on every push to the main branch
+
+The project includes a `vercel.json` configuration file for deployment settings.
+
+For manual deployment:
 ```bash
-npm run build:worker
-npm run deploy
+npm run build
 ```
 
-Configuration files:
-- `wrangler.jsonc` - Cloudflare Workers configuration
-- `open-next.config.ts` - OpenNext.js configuration
+Then deploy via Vercel CLI or the Vercel dashboard.
 
 ## Contributing
 
