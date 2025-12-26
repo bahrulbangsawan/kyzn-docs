@@ -134,3 +134,25 @@ nav,
 header {
   z-index: 50;
 }
+
+/* Mobile search panel fixes */
+@media (max-width: 640px) {
+  /* Ensure search input is always visible on mobile */
+  [data-state="open"] > div[class*="fixed"][class*="z-[60]"] {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Prevent input from being cut off */
+  [data-state="open"] > div[class*="fixed"][class*="z-[60]"] > div[class*="flex-col"] {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+  
+  /* Ensure search input container stays at bottom */
+  [data-state="open"] > div[class*="fixed"][class*="z-[60]"] > div[class*="flex-col"] > div[class*="flex-shrink-0"][class*="border-t"] {
+    position: relative;
+    z-index: 1;
+    background: var(--fd-popover, hsl(var(--popover))) !important;
+  }
+}

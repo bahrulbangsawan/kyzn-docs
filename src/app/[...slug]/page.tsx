@@ -61,7 +61,7 @@ export async function generateMetadata(
   const page = source.getPage(slug);
   if (!page) notFound();
 
-  // Using static OG image to reduce bundle size for Cloudflare Workers
+  // Using static OG image to reduce bundle size
   const ogImage = 'https://files.kyzn.life/brand/og-image.png';
 
   return {

@@ -5,6 +5,12 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  // Fix workspace root detection for Turbopack
+  experimental: {
+    turbo: {
+      root: process.cwd(),
+    },
+  },
   images: {
     remotePatterns: [
       {

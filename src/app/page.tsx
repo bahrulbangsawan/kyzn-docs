@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { BookOpen, Code, Palette, GraduationCap, Search } from 'lucide-react';
+import { BookOpen, Code, Palette, GraduationCap } from 'lucide-react';
 import type { Metadata } from 'next';
+import { SearchButton } from '@/components/search-button';
 
 export const metadata: Metadata = {
   title: 'KYZN Docs',
@@ -57,16 +58,7 @@ export default function HomePage() {
             />
             <span className="font-semibold">KYZN Docs</span>
           </Link>
-          <Link
-            href="/pd"
-            className="flex items-center gap-2 rounded-lg border bg-fd-secondary px-3 py-1.5 text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground sm:w-[200px] md:w-[240px]"
-          >
-            <Search className="size-4" />
-            <span className="hidden sm:inline">Search docs...</span>
-            <kbd className="ml-auto hidden rounded border bg-fd-background px-1.5 py-0.5 text-xs sm:inline">
-              ⌘K
-            </kbd>
-          </Link>
+          <SearchButton />
         </div>
       </header>
 

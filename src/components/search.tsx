@@ -22,7 +22,7 @@ import { DefaultChatTransport } from 'ai';
 import { Markdown } from './markdown';
 import { Presence } from '@radix-ui/react-presence';
 
-const Context = createContext<{
+export const Context = createContext<{
   open: boolean;
   setOpen: (open: boolean) => void;
   chat: UseChatHelpers<UIMessage>;
@@ -36,7 +36,12 @@ function Header() {
   const { setOpen } = use(Context)!;
 
   return (
-    <div className="sticky top-0 flex items-start gap-2">
+    <div 
+      className="flex-shrink-0 flex items-start gap-2 bg-fd-popover pb-2 pt-3 px-3 sm:px-4"
+      style={{
+        paddingTop: 'max(12px, env(safe-area-inset-top, 0px))',
+      }}
+    >
       <div className="flex-1 p-3 border rounded-xl bg-fd-card text-fd-card-foreground">
         <div className="flex items-center gap-2">
           <Bot className="size-4" />
@@ -110,13 +115,23 @@ function SearchAIInput(props: ComponentProps<'form'>) {
   
   // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem(StorageKeyInput);
-    if (saved) setInput(saved);
+    try {
+      const saved = localStorage.getItem(StorageKeyInput);
+      if (saved) setInput(saved);
+    } catch (error) {
+      // localStorage may not be available in some environments
+      console.warn('Failed to load from localStorage:', error);
+    }
   }, []);
   
   // Save to localStorage when input changes
   useEffect(() => {
-    localStorage.setItem(StorageKeyInput, input);
+    try {
+      localStorage.setItem(StorageKeyInput, input);
+    } catch (error) {
+      // localStorage may not be available in some environments
+      console.warn('Failed to save to localStorage:', error);
+    }
   }, [input]);
   
   const onStart = (e?: SyntheticEvent) => {
@@ -132,14 +147,15 @@ function SearchAIInput(props: ComponentProps<'form'>) {
   return (
     <form
       {...props}
-      className={cn('flex items-start pe-2', props.className)}
+      className={cn('flex items-center gap-2 w-full', props.className)}
       onSubmit={onStart}
     >
       <Input
+        id="nd-ai-input"
         value={input}
         placeholder={isLoading ? 'AI is answering...' : 'Ask a question'}
         autoFocus
-        className="p-3"
+        className="flex-1 p-3 min-w-0 w-full"
         disabled={status === 'streaming' || status === 'submitted'}
         onChange={(e) => {
           setInput(e.target.value);
@@ -157,13 +173,13 @@ function SearchAIInput(props: ComponentProps<'form'>) {
           className={cn(
             buttonVariants({
               color: 'secondary',
-              className: 'transition-all rounded-full mt-2 gap-2',
+              className: 'transition-all rounded-full gap-2 flex-shrink-0',
             }),
           )}
           onClick={stop}
         >
           <Loader2 className="size-4 animate-spin text-fd-muted-foreground" />
-          Abort Answer
+          <span className="hidden sm:inline">Abort</span>
         </button>
       ) : (
         <button
@@ -172,7 +188,7 @@ function SearchAIInput(props: ComponentProps<'form'>) {
           className={cn(
             buttonVariants({
               color: 'secondary',
-              className: 'transition-all rounded-full mt-2',
+              className: 'transition-all rounded-full flex-shrink-0',
             }),
           )}
           disabled={input.length === 0}
@@ -461,17 +477,21 @@ export function AISearchPanel() {
       <Presence present={open}>
         <div
           className={cn(
-            'fixed inset-x-4 top-4 bottom-4 z-[60] overflow-hidden bg-fd-popover text-fd-popover-foreground border rounded-2xl shadow-xl',
-            'sm:inset-auto sm:right-4 sm:top-4 sm:bottom-4 sm:w-[400px] xl:w-[460px]',
+            'fixed left-0 right-0 top-0 bottom-0 z-[60] overflow-hidden bg-fd-popover text-fd-popover-foreground border-0 rounded-none shadow-xl',
+            'sm:left-auto sm:right-4 sm:top-20 sm:bottom-4 sm:rounded-2xl sm:border sm:w-[400px] xl:w-[460px]',
+            'pb-safe sm:pb-0',
             open
               ? 'animate-fd-dialog-in'
               : 'animate-fd-dialog-out',
           )}
+          style={{
+            paddingBottom: 'env(safe-area-inset-bottom, 0)',
+          }}
         >
-          <div className="flex flex-col p-4 size-full">
+          <div className="flex flex-col h-full w-full overflow-hidden">
             <Header />
             <List
-              className="px-3 py-4 flex-1 overscroll-contain"
+              className="px-3 py-4 flex-1 min-h-0 overscroll-contain sm:px-4"
               style={{
                 maskImage:
                   'linear-gradient(to bottom, transparent, white 1rem, white calc(100% - 1rem), transparent 100%)',
@@ -485,10 +505,18 @@ export function AISearchPanel() {
                   ))}
               </div>
             </List>
-            <div className="rounded-xl border bg-fd-card text-fd-card-foreground has-focus-visible:ring-2 has-focus-visible:ring-fd-ring">
-              <SearchAIInput />
-              <div className="flex items-center gap-1.5 p-1 empty:hidden">
-                <SearchAIActions />
+            <div 
+              className="flex-shrink-0 border-t bg-fd-popover px-3 py-3 sm:px-4 sm:py-4 relative z-10"
+              style={{
+                paddingBottom: 'max(12px, env(safe-area-inset-bottom, 0px))',
+                minHeight: 'auto',
+              }}
+            >
+              <div className="rounded-xl border bg-fd-card text-fd-card-foreground has-focus-visible:ring-2 has-focus-visible:ring-fd-ring p-3 shadow-lg">
+                <SearchAIInput />
+                <div className="flex items-center gap-1.5 pt-2 empty:hidden">
+                  <SearchAIActions />
+                </div>
               </div>
             </div>
           </div>

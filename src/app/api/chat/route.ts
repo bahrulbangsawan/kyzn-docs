@@ -2,39 +2,71 @@ import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { convertToModelMessages, streamText } from 'ai';
 import { getLLMText, source } from '@/lib/source';
 
-const openrouter = createOpenAICompatible({
-  name: 'openrouter',
-  apiKey: process.env.OPENROUTER_API_KEY,
-  baseURL: 'https://openrouter.ai/api/v1',
-});
+function getOpenRouterClient() {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENROUTER_API_KEY environment variable is not set');
+  }
+  
+  return createOpenAICompatible({
+    name: 'openrouter',
+    apiKey,
+    baseURL: 'https://openrouter.ai/api/v1',
+  });
+}
 
 // Cache the docs content with page info
-let docsCache: { content: string; pages: { title: string; url: string; description?: string }[] } | null = null;
+// Using a Map to support multiple concurrent requests in serverless environments
+const docsCacheMap = new Map<string, Promise<{ content: string; pages: { title: string; url: string; description?: string }[] }>>();
 
 async function getDocsContent() {
-  if (docsCache) return docsCache;
+  const cacheKey = 'docs-content';
   
-  const pages = source.getPages();
-  const texts = await Promise.all(pages.map(getLLMText));
+  // Check if there's already a pending request
+  const existingPromise = docsCacheMap.get(cacheKey);
+  if (existingPromise) {
+    return existingPromise;
+  }
   
-  const pageInfo = pages.map(page => ({
-    title: page.data.title,
-    url: page.url,
-    description: page.data.description,
-  }));
+  // Create a new promise for fetching docs
+  const promise = (async () => {
+    const pages = source.getPages();
+    const texts = await Promise.all(pages.map(getLLMText));
+    
+    const pageInfo = pages.map(page => ({
+      title: page.data.title,
+      url: page.url,
+      description: page.data.description,
+    }));
+    
+    return {
+      content: texts.join('\n\n---\n\n'),
+      pages: pageInfo,
+    };
+  })();
   
-  docsCache = {
-    content: texts.join('\n\n---\n\n'),
-    pages: pageInfo,
-  };
+  docsCacheMap.set(cacheKey, promise);
   
-  return docsCache;
+  // Clean up the cache after a reasonable time (5 minutes)
+  setTimeout(() => {
+    docsCacheMap.delete(cacheKey);
+  }, 5 * 60 * 1000);
+  
+  return promise;
 }
 
 export async function POST(req: Request) {
-  const reqJson = await req.json();
-
   try {
+    const reqJson = await req.json();
+    
+    if (!reqJson || !Array.isArray(reqJson.messages)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request: messages array is required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const openrouter = getOpenRouterClient();
     const { content: docsContent, pages } = await getDocsContent();
     
     // Create a list of available pages for the AI to reference
