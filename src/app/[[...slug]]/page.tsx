@@ -45,7 +45,7 @@ export default async function Page(props: PageProps<'/[[...slug]]'>) {
             a: createRelativeLink(source, page),
           })}
         />
-        <LastUpdate date={page.data.lastModified ?? new Date()} />
+        <LastUpdate date={new Date()} />
       </DocsBody>
     </DocsPage>
   );

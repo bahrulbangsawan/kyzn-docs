@@ -10,6 +10,9 @@
 /out/
 /build
 *.tsbuildinfo
+/dist
+/.open-next
+/.wrangler
 
 # misc
 .DS_Store

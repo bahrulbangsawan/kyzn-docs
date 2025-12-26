@@ -19,7 +19,6 @@ export const docs = defineDocs({
     schema: extendedFrontmatterSchema,
     postprocess: {
       includeProcessedMarkdown: true,
-      includeLastModified: true,
     },
   },
   meta: {
