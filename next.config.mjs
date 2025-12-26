@@ -23,26 +23,39 @@ const config = {
   },
   webpack: (config, { isServer, webpack }) => {
     if (isServer) {
-      // Ignore @vercel/og and WASM files completely to reduce bundle size
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /^@vercel\/og$/,
-        }),
-        new webpack.IgnorePlugin({
-          resourceRegExp: /next\/dist\/compiled\/@vercel\/og\/.*\.wasm$/,
-        }),
-        new webpack.IgnorePlugin({
-          resourceRegExp: /next\/dist\/compiled\/@vercel\/og\/.*\.ttf\.bin$/,
-        })
-      );
+      const emptyModulePath = require.resolve('./src/lib/empty-module.js');
       
-      // Also externalize to be safe
-      config.externals = config.externals || [];
-      if (Array.isArray(config.externals)) {
-        config.externals.push('@vercel/og');
-      } else {
-        config.externals = [config.externals, '@vercel/og'];
-      }
+      // Use aliases to replace @vercel/og dependencies
+      config.resolve = config.resolve || {};
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@vercel/og': emptyModulePath,
+      };
+      
+      // Replace all variations of @vercel/og imports (including absolute paths and WASM files)
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /@vercel\/og/,
+          emptyModulePath
+        ),
+        new webpack.NormalModuleReplacementPlugin(
+          /next\/dist\/compiled\/@vercel\/og/,
+          emptyModulePath
+        ),
+        new webpack.NormalModuleReplacementPlugin(
+          /.*@vercel\/og.*\.wasm/,
+          emptyModulePath
+        ),
+        new webpack.NormalModuleReplacementPlugin(
+          /.*@vercel\/og.*\.ttf\.bin/,
+          emptyModulePath
+        ),
+        // Catch absolute paths that might be embedded
+        new webpack.NormalModuleReplacementPlugin(
+          /.*\/node_modules\/next\/dist\/compiled\/@vercel\/og/,
+          emptyModulePath
+        )
+      );
     }
     return config;
   },
