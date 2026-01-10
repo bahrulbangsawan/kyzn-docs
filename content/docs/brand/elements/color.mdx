@@ -7,59 +7,202 @@ description: Menjelaskan penggunaan warna dan penerapannya
 
 Warna adalah elemen penting dalam identitas visual KYZN. Penggunaan warna yang konsisten membantu membangun pengenalan brand.
 
-## Primary Colors
+## Category Colors
 
-### Brand Primary
-Warna utama yang merepresentasikan KYZN.
+<ColorPalette
+  name="fitness-and-dance"
+  description="Fitness & Dance"
+  defaultShade="700"
+  colors={{
+    '50': '#fff0f0',
+    '100': '#ffdddd',
+    '200': '#ffc1c1',
+    '300': '#ff9595',
+    '400': '#ff5959',
+    '500': '#ff2626',
+    '600': '#fc0606',
+    '700': '#c90000',
+    '800': '#af0505',
+    '900': '#900c0c',
+    '950': '#500000',
+  }}
+/>
 
-| Nama | Hex | RGB | Penggunaan |
-|------|-----|-----|------------|
-| Primary | `#0066FF` | 0, 102, 255 | CTA, link, accent |
-| Primary Dark | `#0052CC` | 0, 82, 204 | Hover state |
-| Primary Light | `#E6F0FF` | 230, 240, 255 | Background subtle |
+<ColorPalette
+  name="sports"
+  description="Sports"
+  defaultShade="600"
+  colors={{
+    '50': '#ecf3ff',
+    '100': '#dde9ff',
+    '200': '#c2d7ff',
+    '300': '#9dbbff',
+    '400': '#7694ff',
+    '500': '#566ffe',
+    '600': '#3643f3',
+    '700': '#2b34d7',
+    '800': '#262fad',
+    '900': '#273088',
+    '950': '#171b4f',
+  }}
+/>
+
+<ColorPalette
+  name="education-and-non-sport"
+  description="Education & Non-Sport"
+  defaultShade="300"
+  colors={{
+    '50': '#fcf8ea',
+    '100': '#f8eec9',
+    '200': '#f2dc96',
+    '300': '#e9bd4a',
+    '400': '#e3a92c',
+    '500': '#d3921f',
+    '600': '#b67018',
+    '700': '#925016',
+    '800': '#79411a',
+    '900': '#68361b',
+    '950': '#3c1b0c',
+  }}
+/>
+
+<ColorPalette
+  name="nutrition"
+  description="Nutrition"
+  defaultShade="300"
+  colors={{
+    '50': '#f1f8f2',
+    '100': '#deeddf',
+    '200': '#c0dac4',
+    '300': '#8bba96',
+    '400': '#67a076',
+    '500': '#478259',
+    '600': '#346744',
+    '700': '#295337',
+    '800': '#23422e',
+    '900': '#1d3726',
+    '950': '#101e16',
+  }}
+/>
+
+<ColorPalette
+  name="wellness-and-family"
+  description="Wellness & Family"
+  defaultShade="200"
+  colors={{
+    '50': '#fcf8f0',
+    '100': '#f7efdd',
+    '200': '#eedcbb',
+    '300': '#e3c28e',
+    '400': '#d6a361',
+    '500': '#cd8a42',
+    '600': '#bf7437',
+    '700': '#9f5c2f',
+    '800': '#804a2c',
+    '900': '#683e26',
+    '950': '#371f13',
+  }}
+/>
 
 ## Neutral Colors
 
-### Grayscale
-Digunakan untuk teks, background, dan border.
-
-| Nama | Hex | Penggunaan |
-|------|-----|------------|
-| Black | `#000000` | Heading, teks utama |
-| Gray 900 | `#1A1A1A` | Teks body |
-| Gray 700 | `#4A4A4A` | Teks secondary |
-| Gray 500 | `#8A8A8A` | Placeholder, disabled |
-| Gray 300 | `#D4D4D4` | Border |
-| Gray 100 | `#F5F5F5` | Background |
-| White | `#FFFFFF` | Background utama |
+<ColorPalette
+  name="neutral"
+  description="Digunakan untuk teks, background, dan border"
+  defaultShade="600"
+  colors={{
+    '50': '#fafafa',
+    '100': '#f5f5f5',
+    '200': '#e5e5e5',
+    '300': '#d4d4d4',
+    '400': '#a3a3a3',
+    '500': '#737373',
+    '600': '#525252',
+    '700': '#404040',
+    '800': '#262626',
+    '900': '#171717',
+    '950': '#0a0a0a',
+  }}
+/>
 
 ## Semantic Colors
 
 ### Status Colors
+
 Warna untuk menunjukkan status atau feedback.
 
-| Status | Hex | Penggunaan |
-|--------|-----|------------|
-| Success | `#22C55E` | Berhasil, positif |
-| Warning | `#F59E0B` | Peringatan |
-| Error | `#EF4444` | Error, negatif |
-| Info | `#3B82F6` | Informasi |
-
-## Dark Mode
-
-### Background
-| Nama | Light | Dark |
-|------|-------|------|
-| Background | `#FFFFFF` | `#0A0A0A` |
-| Card | `#F5F5F5` | `#1A1A1A` |
-| Border | `#E5E5E5` | `#2A2A2A` |
-
-### Text
-| Nama | Light | Dark |
-|------|-------|------|
-| Primary | `#000000` | `#FFFFFF` |
-| Secondary | `#4A4A4A` | `#A0A0A0` |
-| Muted | `#8A8A8A` | `#6A6A6A` |
+<ColorPaletteGroup
+  palettes={[
+    {
+      name: 'success',
+      description: 'Berhasil, positif',
+      colors: {
+        '50': '#f0fdf4',
+        '100': '#dcfce7',
+        '200': '#bbf7d0',
+        '300': '#86efac',
+        '400': '#4ade80',
+        '500': '#22c55e',
+        '600': '#16a34a',
+        '700': '#15803d',
+        '800': '#166534',
+        '900': '#14532d',
+        '950': '#052e16',
+      },
+    },
+    {
+      name: 'warning',
+      description: 'Peringatan',
+      colors: {
+        '50': '#fffbeb',
+        '100': '#fef3c7',
+        '200': '#fde68a',
+        '300': '#fcd34d',
+        '400': '#fbbf24',
+        '500': '#f59e0b',
+        '600': '#d97706',
+        '700': '#b45309',
+        '800': '#92400e',
+        '900': '#78350f',
+        '950': '#451a03',
+      },
+    },
+    {
+      name: 'error',
+      description: 'Error, negatif',
+      colors: {
+        '50': '#fef2f2',
+        '100': '#fee2e2',
+        '200': '#fecaca',
+        '300': '#fca5a5',
+        '400': '#f87171',
+        '500': '#ef4444',
+        '600': '#dc2626',
+        '700': '#b91c1c',
+        '800': '#991b1b',
+        '900': '#7f1d1d',
+        '950': '#450a0a',
+      },
+    },
+    {
+      name: 'info',
+      description: 'Informasi',
+      colors: {
+        '50': '#eff6ff',
+        '100': '#dbeafe',
+        '200': '#bfdbfe',
+        '300': '#93c5fd',
+        '400': '#60a5fa',
+        '500': '#3b82f6',
+        '600': '#2563eb',
+        '700': '#1d4ed8',
+        '800': '#1e40af',
+        '900': '#1e3a8a',
+        '950': '#172554',
+      },
+    },
+  ]}
+/>
 
 ## Penerapan
 
